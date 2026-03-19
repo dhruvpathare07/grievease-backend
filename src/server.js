@@ -13,22 +13,11 @@ const app = express();
 connectDB();
 
 // middleware
-const allowedOrigins = [
-  "http://localhost:5000",
-  "http://localhost:5173",
-  "https://admirable-croissant-4690b1.netlify.app"
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  }
+  origin: "*"
 }));
-app.use(express.json());
+
+app.use(express.json()); // 🔥 IMPORTANT
 
 // routes
 app.use("/api/auth", authRoutes);
